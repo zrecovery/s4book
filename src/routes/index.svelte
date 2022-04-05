@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { articlesDBStoreService } from '$lib/articles/articlesStoreService';
+	import Pagination from '$lib/components/Pagination/Pagination.svelte';
 	import { liveQuery } from 'dexie';
 
 	$: keyword = '';
@@ -13,7 +14,7 @@
 	let currentPage = 1;
 
 	$: page = Math.ceil($totalArticles / limit);
-	$: offset = Math.ceil(currentPage * limit);
+	$: offset = Math.ceil((currentPage - 1) * limit);
 
 	$: articles = liveQuery(async () => {
 		return articlesDBStoreService.getArticles(limit, offset, keywords);
@@ -31,6 +32,4 @@
 		{/each}
 	</div>
 {/if}
-<div>
-	<p>{currentPage}/{page}</p>
-</div>
+<Pagination bind:currentPage bind:page />
