@@ -1,59 +1,36 @@
-<script context="module" lang="ts">
-	export const prerender = true;
-</script>
-
 <script lang="ts">
-	import Counter from '$lib/Counter.svelte';
+	import { articlesDBStoreService } from '$lib/articles/articlesStoreService';
+	import { liveQuery } from 'dexie';
+
+	$: keyword = '';
+	$: keywords = keyword.split(' ');
+
+	$: totalArticles = liveQuery(async () => {
+		return articlesDBStoreService.countArticles(keywords);
+	});
+
+	const limit = 15;
+	let currentPage = 1;
+
+	$: page = Math.ceil($totalArticles / limit);
+	$: offset = Math.ceil(currentPage * limit);
+
+	$: articles = liveQuery(async () => {
+		return articlesDBStoreService.getArticles(limit, offset, keywords);
+	});
 </script>
 
-<svelte:head>
-	<title>Home</title>
-</svelte:head>
+<input bind:value={keyword} />
 
-<section>
-	<h1>
-		<div class="welcome">
-			<picture>
-				<source srcset="svelte-welcome.webp" type="image/webp" />
-				<img src="svelte-welcome.png" alt="Welcome" />
-			</picture>
-		</div>
-
-		to your new<br />SvelteKit app
-	</h1>
-
-	<h2>
-		try editing <strong>src/routes/index.svelte</strong>
-	</h2>
-
-	<Counter />
-</section>
-
-<style>
-	section {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		flex: 1;
-	}
-
-	h1 {
-		width: 100%;
-	}
-
-	.welcome {
-		position: relative;
-		width: 100%;
-		height: 0;
-		padding: 0 0 calc(100% * 495 / 2048) 0;
-	}
-
-	.welcome img {
-		position: absolute;
-		width: 100%;
-		height: 100%;
-		top: 0;
-		display: block;
-	}
-</style>
+{#if $articles}
+	<div>
+		{#each $articles as article}
+			<a href="/articles/{article.id}">
+				<p>{article.title}</p>
+			</a>
+		{/each}
+	</div>
+{/if}
+<div>
+	<p>{currentPage}/{page}</p>
+</div>
