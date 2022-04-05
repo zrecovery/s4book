@@ -56,7 +56,9 @@ export class ArticlesDBStoreService implements IArticleStoreService {
         throw new Error('Method not implemented.');
     }
     deleteArticle(id: number): Promise<number> {
-        throw new Error('Method not implemented.');
+        return articlesDBStore.articles
+            .delete(id)
+            .then(()=>{return id})
     }
 
 }
