@@ -34,6 +34,7 @@ export class ArticlesDBStoreService implements IArticleStoreService {
         let isArticlesIncludeKeywords = isContentIncludeKeywords(keywords);
         return articlesDBStore
             .articles
+            .orderBy("book")
             .filter(isArticlesIncludeKeywords)
             .offset(offset)
             .limit(limit)
@@ -58,7 +59,7 @@ export class ArticlesDBStoreService implements IArticleStoreService {
     deleteArticle(id: number): Promise<number> {
         return articlesDBStore.articles
             .delete(id)
-            .then(()=>{return id})
+            .then(() => { return id })
     }
 
 }
