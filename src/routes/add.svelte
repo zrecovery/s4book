@@ -36,3 +36,12 @@
 <div>
 	<input accept="application/json" type="file" bind:files id="files" />
 </div>
+
+<style>
+	form {
+		margin: 1rem;
+		display: grid;
+		grid-template-rows: repeat(4, 1fr) 2fr 1fr;
+		gap: 1rem;
+	}
+</style>
