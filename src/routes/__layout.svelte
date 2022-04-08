@@ -9,10 +9,7 @@
 	<slot />
 </main>
 
-<footer>
-	
-</footer>
+<footer />
 
 <style>
-
 </style>
