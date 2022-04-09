@@ -14,13 +14,13 @@
 <nav aria-label="Page navigation">
 	<ul class="pagination">
 		<li class="page-item {currentPage !== 1 ? '' : 'disabled'}">
-			<button class="page-link" on:click={prev} aria-label="Previous">
+			<button type="button" class="page-link" on:click={prev} aria-label="Previous">
 				<span aria-hidden="true">&laquo;</span>
 			</button>
 		</li>
 		<li class="page-item"><p class="page-link">{currentPage}/{page}</p></li>
 		<li class="page-item {currentPage !== page ? '' : 'disabled'}">
-			<button class="page-link" on:click={next} aria-label="Next">
+			<button type="button" class="page-link" on:click={next} aria-label="Next">
 				<span aria-hidden="true">&raquo;</span>
 			</button>
 		</li>

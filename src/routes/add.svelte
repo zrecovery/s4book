@@ -25,9 +25,10 @@
 	}
 </script>
 
+<svelte:head><title>添加</title></svelte:head>
 <ArticleEditor {article} />
 <div class="col-12">
-	<button class="btn btn-primary mb-3 col-auto" on:click={save}>保存</button>
+	<button type="button" class="btn btn-primary mb-3 col-auto" on:click={save}>保存</button>
 </div>
 
 <input class="form-control col-6" accept="application/json" type="file" bind:files id="files" />

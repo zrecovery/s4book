@@ -31,6 +31,7 @@
 	let mode: Mode = Mode.Read;
 </script>
 
+<svelte:head><title>{article.title}</title></svelte:head>
 {#if mode === Mode.Read}
 	<div class="m-2">
 		{#if article}
@@ -41,6 +42,7 @@
 		{/if}
 	</div>
 	<button
+		type="button"
 		class="btn btn-primary col-2 m-2"
 		on:click={() => {
 			mode = Mode.Edit;
@@ -48,11 +50,12 @@
 	>
 {:else}
 	<button
+		type="button"
 		on:click={() => {
 			mode = Mode.Read;
 		}}>返回</button
 	>
 
 	<ArticleEditor bind:article />
-	<button on:click={update}>更改</button>
+	<button type="button" on:click={update}>更改</button>
 {/if}

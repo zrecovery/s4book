@@ -20,6 +20,7 @@
 	});
 </script>
 
+<svelte:head><title>列表</title></svelte:head>
 {#if $articles}
 	<ul class="list-group">
 		{#each $articles as article}

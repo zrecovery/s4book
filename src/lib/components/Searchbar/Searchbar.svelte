@@ -4,6 +4,6 @@
 
 <div class="row g-3">
 	<div class="col-auto">
-		<input class="form-control col-sm-7" type="text" bind:value={$keyword} />
+		<input placeholder="关键词" class="form-control col-sm-7" type="text" bind:value={$keyword} />
 	</div>
 </div>

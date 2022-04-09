@@ -10,6 +10,6 @@
 		<input class="form-control col-sm-7" type="text" bind:value={keyword} />
 	</div>
 	<div class="col-auto">
-		<button class="btn btn-primary" on:click={find}>搜索</button>
+		<button type="button" class="btn btn-primary" on:click={find}>搜索</button>
 	</div>
 </div>
