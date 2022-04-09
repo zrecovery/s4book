@@ -1,6 +1,6 @@
 # s4book 在线文章管理
 
-基于IndexedDB、PWA、Svelted的在线文章管理
+基于 IndexedDB、PWA、Svelte 的在线文章管理
 
 ## 安装
 
@@ -21,6 +21,7 @@ pnpm run dev -- --open
 ## 构建
 
 创建生产版
+
 ```bash
 pnpm run build
 ```
