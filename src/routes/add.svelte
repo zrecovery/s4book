@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { articlesDBStoreService } from '$lib/articles/articlesStoreService';
 	import { Article } from '$lib/articles/articles';
+	import ArticleEditor from '$lib/components/ArticleEditor/ArticleEditor.svelte';
 
 	let files: FileList;
 	let article = new Article('', '', '', 1.0, '');
@@ -24,24 +25,9 @@
 	}
 </script>
 
-<form>
-	<label>标题：<input type="text" placeholder="标题" bind:value={article.title} /></label>
-	<label>作者：<input type="text" placeholder="作者" bind:value={article.author} /></label>
-	<label>系列：<input type="text" placeholder="系列" bind:value={article.book} /></label>
-	<label>顺序：<input type="number" placeholder="顺序" bind:value={article.serial} /></label>
-	<label>内容：<textarea bind:value={article.content} /></label>
-	<button on:click={save}>保存</button>
-</form>
-
-<div>
-	<input accept="application/json" type="file" bind:files id="files" />
+<ArticleEditor {article} />
+<div class="col-12">
+	<button class="btn btn-primary mb-3 col-auto" on:click={save}>保存</button>
 </div>
 
-<style>
-	form {
-		margin: 1rem;
-		display: grid;
-		grid-template-rows: repeat(4, 1fr) 2fr 1fr;
-		gap: 1rem;
-	}
-</style>
+<input class="form-control col-6" accept="application/json" type="file" bind:files id="files" />

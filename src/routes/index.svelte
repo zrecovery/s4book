@@ -1,10 +1,9 @@
 <script lang="ts">
 	import { articlesDBStoreService } from '$lib/articles/articlesStoreService';
 	import Pagination from '$lib/components/Pagination/Pagination.svelte';
+	import { keyword } from '$lib/stores/search';
 	import { liveQuery } from 'dexie';
-
-	$: keyword = '';
-	$: keywords = keyword.split(' ');
+	$: keywords = $keyword.split(' ');
 
 	$: totalArticles = liveQuery(async () => {
 		return articlesDBStoreService.countArticles(keywords);
@@ -21,15 +20,15 @@
 	});
 </script>
 
-<input bind:value={keyword} />
-
 {#if $articles}
-	<div>
+	<ul class="list-group">
 		{#each $articles as article}
-			<a href="/articles/{article.id}">
-				<p>{article.title}</p>
-			</a>
+			<li class="list-group-item">
+				<a href="/articles/{article.id}">
+					{article.title}
+				</a>
+			</li>
 		{/each}
-	</div>
+	</ul>
 {/if}
 <Pagination bind:currentPage bind:page />

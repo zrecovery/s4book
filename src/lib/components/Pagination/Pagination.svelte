@@ -1,8 +1,8 @@
 <script lang="ts">
-    export let currentPage:number;
-    export let page: number;
+	export let currentPage: number;
+	export let page: number;
 
-    function prev() {
+	function prev() {
 		currentPage > 1 ? currentPage-- : (currentPage = 1);
 	}
 
@@ -11,12 +11,18 @@
 	}
 </script>
 
-<div>
-	{#if currentPage !== 1}
-		<button on:click={prev}>上一页</button>
-	{/if}
-	<p>{currentPage}/{page}</p>
-	{#if currentPage !== page}
-		<button on:click={next}>下一页</button>
-	{/if}
-</div>
+<nav aria-label="Page navigation">
+	<ul class="pagination">
+		<li class="page-item {currentPage !== 1 ? '' : 'disabled'}">
+			<button class="page-link" on:click={prev} aria-label="Previous">
+				<span aria-hidden="true">&laquo;</span>
+			</button>
+		</li>
+		<li class="page-item"><p class="page-link">{currentPage}/{page}</p></li>
+		<li class="page-item {currentPage !== page ? '' : 'disabled'}">
+			<button class="page-link" on:click={next} aria-label="Next">
+				<span aria-hidden="true">&raquo;</span>
+			</button>
+		</li>
+	</ul>
+</nav>

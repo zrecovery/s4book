@@ -5,11 +5,8 @@
 
 <Header />
 
-<main>
+<main class="p-4" style="margin-top: 3rem;">
 	<slot />
 </main>
 
 <footer />
-
-<style>
-</style>
