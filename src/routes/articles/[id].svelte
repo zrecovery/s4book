@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import type { Article } from '$lib/articles/articles';
+	import { Article } from '$lib/articles/articles';
 
 	import { articlesDBStoreService } from '$lib/articles/articlesStoreService';
 	import ArticleEditor from '$lib/components/ArticleEditor/ArticleEditor.svelte';
 
 	const ID = Number($page.params.id);
-	let article: Article;
+	let article: Article = new Article("", "", "",1.0, "");
 	articlesDBStoreService
 		.getArticleByID(ID)
 		.then((data) => {
@@ -32,6 +32,7 @@
 </script>
 
 <svelte:head><title>{article.title}</title></svelte:head>
+
 {#if mode === Mode.Read}
 	<div class="m-2">
 		{#if article}
@@ -51,6 +52,7 @@
 {:else}
 	<button
 		type="button"
+		class="btn btn primary"
 		on:click={() => {
 			mode = Mode.Read;
 		}}>返回</button
