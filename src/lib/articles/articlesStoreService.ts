@@ -5,12 +5,11 @@ import type { Article, IArticleStoreService } from './articles';
 function isContentIncludeKeywords(keywords: string[]): (article: Article) => boolean {
 	return function (article: Article) {
 		const content = article.content;
-		let res = keywords
+		return keywords
 			.map((keyword) => {
-				return content.indexOf(keyword);
+				return content.includes(keyword);
 			})
-			.indexOf(-1);
-		return res === -1;
+			.includes(false);
 	};
 }
 
