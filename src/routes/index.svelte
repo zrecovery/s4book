@@ -12,7 +12,7 @@
 	const limit = 15;
 	let currentPage = 1;
 
-	$: page = Math.ceil($totalArticles / limit)===0?1:Math.ceil($totalArticles / limit);
+	$: page = Math.ceil($totalArticles / limit) === 0 ? 1 : Math.ceil($totalArticles / limit);
 	$: offset = Math.ceil((currentPage - 1) * limit);
 
 	$: articles = liveQuery(async () => {

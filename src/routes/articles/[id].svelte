@@ -6,7 +6,7 @@
 	import ArticleEditor from '$lib/components/ArticleEditor/ArticleEditor.svelte';
 
 	const ID = Number($page.params.id);
-	let article: Article = new Article("", "", "",1.0, "");
+	let article: Article = new Article('', '', '', 1.0, '');
 	articlesDBStoreService
 		.getArticleByID(ID)
 		.then((data) => {
