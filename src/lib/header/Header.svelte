@@ -13,26 +13,26 @@
 <header class=" mb-2">
 	<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top " style="grid-area: nav;">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="/">主页</a>
-			{#if $page.url.pathname === '/'}
-				<Searchbar />
-			{:else}
-				<Findbar />
-			{/if}
-
 			<button
 				class="navbar-toggler"
 				type="button"
 				data-bs-toggle="collapse"
-				data-bs-target="#navbarTogglerDemo02"
-				aria-controls="navbarTogglerDemo02"
+				data-bs-target="#navbarToggler"
+				aria-controls="navbarToggler"
 				aria-expanded="false"
 				aria-label="Toggle navigation"
 				on:click={toggleClick}
 			>
 				<span class="navbar-toggler-icon" />
 			</button>
-			<div class={toggle ? 'navbar-collapse collapse' : 'navbar-collapse'} id="navbarTogglerDemo02">
+			<div>
+				{#if $page.url.pathname === '/'}
+					<Searchbar />
+				{:else}
+					<Findbar />
+				{/if}
+			</div>
+			<div class={toggle ? 'navbar-collapse collapse' : 'navbar-collapse'} id="navbarToggler">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 					<li class="nav-item" class:active={$page.url.pathname === '/'}>
 						<a
@@ -57,6 +57,7 @@
 					</li>
 				</ul>
 			</div>
+			
 		</div>
 	</nav>
 	<div style="grid-area: alert;">
