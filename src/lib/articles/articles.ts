@@ -27,7 +27,7 @@ export class Article extends BaseArticle {
 	}
 }
 
-export interface IArticleStoreService {
+export interface ArticleStoreService {
 	getArticleByID(id: number): Promise<Article>;
 	getArticles(limit: number, offset: number, keywords?: string[]): Promise<Article[]>;
 	countArticles(keywords?: string[]): Promise<number>;

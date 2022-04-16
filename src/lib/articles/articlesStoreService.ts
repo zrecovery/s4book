@@ -1,15 +1,15 @@
 import Dexie, { type Table } from 'dexie';
-import type { Article, IArticleStoreService } from './articles';
+import type { Article, ArticleStoreService } from './articles';
 
 //判断是否包含全部关键词
-function isContentIncludeKeywords(keywords: string[]): (article: Article) => boolean {
+function isArticleContentIncludeKeywords(keywords: string[]): (article: Article) => boolean {
 	return function (article: Article) {
 		const content = article.content;
-		return keywords
+		return !(keywords
 			.map((keyword) => {
 				return content.includes(keyword);
 			})
-			.includes(false);
+			.includes(false));
 	};
 }
 
@@ -26,13 +26,13 @@ export class ArticlesDBStore extends Dexie {
 
 export const articlesDBStore = new ArticlesDBStore();
 
-export class ArticlesDBStoreService implements IArticleStoreService {
+export class ArticlesDBStoreService implements ArticleStoreService {
 	getArticleByID(id: number): Promise<Article> {
 		return articlesDBStore.articles.get(id);
 	}
 
 	getArticles(limit: number, offset: number, keywords?: string[]): Promise<Article[]> {
-		let isArticlesIncludeKeywords = isContentIncludeKeywords(keywords);
+		let isArticlesIncludeKeywords = isArticleContentIncludeKeywords(keywords);
 		return articlesDBStore.articles
 			.orderBy('book')
 			.filter(isArticlesIncludeKeywords)
@@ -41,7 +41,7 @@ export class ArticlesDBStoreService implements IArticleStoreService {
 			.toArray();
 	}
 	countArticles(keywords?: string[]): Promise<number> {
-		let isArticlesIncludeKeywords = isContentIncludeKeywords(keywords);
+		let isArticlesIncludeKeywords = isArticleContentIncludeKeywords(keywords);
 		return articlesDBStore.articles.filter(isArticlesIncludeKeywords).count();
 	}
 	addArticles(articles: Article[]): Promise<number> {
