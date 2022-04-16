@@ -1,4 +1,3 @@
 import { writable } from 'svelte/store';
 
-export let keyword = writable('');
-
+export let alertMessage = writable('');

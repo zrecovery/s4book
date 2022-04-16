@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { articlesDBStoreService } from '$lib/articles/articlesStoreService';
+	import { articlesDBStoreService } from '$lib/articles/articlesStore.service';
 	import Pagination from '$lib/components/Pagination/Pagination.svelte';
 	import { keyword } from '$lib/stores/search';
 	import { liveQuery } from 'dexie';
@@ -32,4 +32,16 @@
 		{/each}
 	</ul>
 {/if}
-<Pagination bind:currentPage bind:page />
+<div class="pagination fixed-bottom">
+	<Pagination bind:currentPage bind:page />
+</div>
+
+<style>
+	.pagination {
+		display: grid;
+		justify-self: center;
+		justify-content: center;
+		align-items: center;
+		align-self: center;
+}
+</style>

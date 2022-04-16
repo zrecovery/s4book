@@ -1,7 +1,8 @@
 <script lang="ts">
-	import { articlesDBStoreService } from '$lib/articles/articlesStoreService';
+	import { articlesDBStoreService } from '$lib/articles/articlesStore.service';
 	import { Article } from '$lib/articles/articles';
 	import ArticleEditor from '$lib/components/ArticleEditor/ArticleEditor.svelte';
+	import { alertMessage } from '$lib/stores/alert';
 
 	let files: FileList;
 	let article = new Article('', '', '', 1.0, '');
@@ -21,11 +22,20 @@
 		Promise.all(fileList.map(saveArticleFromJSON));
 	}
 	async function save() {
-		await articlesDBStoreService.addArticles([article]);
+		await articlesDBStoreService
+			.addArticles([article])
+			.then((data) => {
+				$alertMessage = String(data);
+			})
+			.catch((err) => {
+				console.error(err);
+				$alertMessage = err;
+			});
 	}
 </script>
 
 <svelte:head><title>添加</title></svelte:head>
+
 <ArticleEditor {article} />
 <div class="col-12">
 	<button type="button" class="btn btn-primary mb-3 col-auto" on:click={save}>保存</button>

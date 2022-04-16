@@ -2,6 +2,8 @@
 	import { page } from '$app/stores';
 	import Findbar from '$lib/components/Findbar/findbar.svelte';
 	import Searchbar from '$lib/components/Searchbar/Searchbar.svelte';
+	import Alert from '$lib/components/Alert/Alert.svelte';
+
 	let toggle = true;
 	function toggleClick() {
 		toggle = !toggle;
@@ -9,7 +11,7 @@
 </script>
 
 <header class=" mb-2">
-	<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top ">
+	<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top " style="grid-area: nav;">
 		<div class="container-fluid">
 			<a class="navbar-brand" href="/">主页</a>
 			{#if $page.url.pathname === '/'}
@@ -57,4 +59,18 @@
 			</div>
 		</div>
 	</nav>
+	<div style="grid-area: alert;">
+		<Alert />
+	</div>
 </header>
+
+<style>
+	header {
+		display: grid;
+		grid-template-areas:
+			'nav'
+			'alert';
+		grid-template-rows: 2fr 2fr;
+		gap: 4vw;
+	}
+</style>
