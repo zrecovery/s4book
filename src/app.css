@@ -1,20 +1,21 @@
 body {
-    display: grid;
-    grid-template-areas: "header"
-                        "main"
-                        "footer";
-    grid-template-rows: minmax(4vw,8vw) 1fr 4vw;
-    grid-template-columns: 1fr;
+	display: grid;
+	grid-template-areas:
+		'header'
+		'main'
+		'footer';
+	grid-template-rows: minmax(4vw, 8vw) 1fr 4vw;
+	grid-template-columns: 1fr;
 }
 
 header {
-    grid-area: header;
+	grid-area: header;
 }
 
 main {
-    grid-area: main;
+	grid-area: main;
 }
 
 footer {
-    grid-area: footer;
+	grid-area: footer;
 }

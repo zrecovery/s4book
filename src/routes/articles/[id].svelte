@@ -20,7 +20,7 @@
 	async function update() {
 		try {
 			let result = await articlesDBStoreService.updateArticle(ID, article);
-			$alertMessage = `已保存ID：${ID}`;
+			$alertMessage = `已修改：${result}`;
 		} catch (error) {
 			console.error(error);
 		}
@@ -29,7 +29,7 @@
 	async function remove() {
 		try {
 			await articlesDBStoreService.deleteArticle(ID);
-			$alertMessage = `已删除ID：${ID}`;
+			$alertMessage = `已删除：${ID}`;
 		} catch (err) {
 			console.error(err);
 		}

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { alertMessage } from '$lib/stores/search';
+	import { alertMessage } from '$lib/stores/alert';
 
 	export let message = '';
 	alertMessage.subscribe((msg) => {

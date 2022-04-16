@@ -5,11 +5,11 @@ import type { Article, ArticleStoreService } from './articles';
 function isArticleContentIncludeKeywords(keywords: string[]): (article: Article) => boolean {
 	return function (article: Article) {
 		const content = article.content;
-		return !(keywords
+		return !keywords
 			.map((keyword) => {
 				return content.includes(keyword);
 			})
-			.includes(false));
+			.includes(false);
 	};
 }
 
@@ -32,7 +32,7 @@ export class ArticlesDBStoreService implements ArticleStoreService {
 	}
 
 	getArticles(limit: number, offset: number, keywords?: string[]): Promise<Article[]> {
-		let isArticlesIncludeKeywords = isArticleContentIncludeKeywords(keywords);
+		const isArticlesIncludeKeywords = isArticleContentIncludeKeywords(keywords);
 		return articlesDBStore.articles
 			.orderBy('book')
 			.filter(isArticlesIncludeKeywords)
@@ -41,21 +41,19 @@ export class ArticlesDBStoreService implements ArticleStoreService {
 			.toArray();
 	}
 	countArticles(keywords?: string[]): Promise<number> {
-		let isArticlesIncludeKeywords = isArticleContentIncludeKeywords(keywords);
+		const isArticlesIncludeKeywords = isArticleContentIncludeKeywords(keywords);
 		return articlesDBStore.articles.filter(isArticlesIncludeKeywords).count();
 	}
-	addArticles(articles: Article[]): Promise<number> {
-		return articlesDBStore.articles.bulkAdd(articles).then((data) => {
-			return articles.length;
-		});
+	async addArticles(articles: Article[]): Promise<number> {
+		const data = await articlesDBStore.articles.bulkAdd(articles);
+		return Number(data);
 	}
 	updateArticle(id: number, article: Article): Promise<number> {
 		return articlesDBStore.articles.update(id, article);
 	}
-	deleteArticle(id: number): Promise<number> {
-		return articlesDBStore.articles.delete(id).then(() => {
-			return id;
-		});
+	async deleteArticle(id: number): Promise<number> {
+		await articlesDBStore.articles.delete(id);
+		return id;
 	}
 }
 
