@@ -46,7 +46,7 @@
 {#if mode === Mode.Read}
 	<div class="m-2">
 		{#if article}
-			<article>
+			<article style="font-size: large;">
 				<h1>{article.title}</h1>
 				<p style="white-space: pre-line;">{article.content}</p>
 			</article>
