@@ -1,9 +1,6 @@
 {
 	"compilerOptions": {
-		"lib": [
-			"es2021",
-			"DOM"
-		],
+		"lib": ["es2021", "DOM"],
 		"target": "es2021"
 	},
 	"extends": "./.svelte-kit/tsconfig.json"
